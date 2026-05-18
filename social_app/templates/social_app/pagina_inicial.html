@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Rede Social</title>
+</head>
+<body>
+    <h1>Publicações</h1>
+    <hr>
+    {% for post in posts %}
+        <p><strong><a href="{% url 'perfil_utilizador' post.autor.username %}">{{ post.autor.username }}</a></strong> - {{ post.criado_em }}</p>
+        <p>{{ post.conteudo }}</p>
+        <p>Likes: {{ post.likes.count }}</p>
+        <a href="{% url 'dar_like' post.id %}">Like</a> |
+        <a href="{% url 'detalhe_post' post.id %}">Comentários</a>
+        <hr>
+    {% empty %}
+        <p>Sem publicações.</p>
+    {% endfor %}
+</body>
+</html>

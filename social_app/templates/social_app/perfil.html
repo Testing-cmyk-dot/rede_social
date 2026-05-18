@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Perfil de {{ utilizador.username }}</title>
+</head>
+<body>
+    <h1>Perfil de {{ utilizador.username }}</h1>
+    <p>Membro desde: {{ utilizador.date_joined }}</p>
+    <hr>
+
+    <h2>Publicações</h2>
+    {% for post in posts %}
+        <p>{{ post.criado_em }}</p>
+        <p>{{ post.conteudo }}</p>
+        <p>Likes: {{ post.likes.count }}</p>
+        <a href="{% url 'detalhe_post' post.id %}">Ver publicação</a>
+        <hr>
+    {% empty %}
+        <p>Sem publicações.</p>
+    {% endfor %}
+
+    <a href="{% url 'pagina_inicial' %}">Voltar ao início</a>
+</body>
+</html>

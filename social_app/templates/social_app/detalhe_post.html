@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Publicação</title>
+</head>
+<body>
+    <h1>Publicação de {{ post.autor.username }}</h1>
+    <p>{{ post.conteudo }}</p>
+    <p>Likes: {{ post.likes.count }}</p>
+    <a href="{% url 'dar_like' post.id %}">Like</a>
+    <hr>
+
+    <h2>Comentários</h2>
+    {% for comentario in comentarios %}
+        <p><strong>{{ comentario.autor.username }}</strong>: {{ comentario.texto }}</p>
+    {% empty %}
+        <p>Sem comentários.</p>
+    {% endfor %}
+
+    <h3>Adicionar comentário</h3>
+    <form method="post">
+        {% csrf_token %}
+        <textarea name="texto" rows="3" cols="40"></textarea><br>
+        <button type="submit">Comentar</button>
+    </form>
+
+    <br>
+    <a href="{% url 'pagina_inicial' %}">Voltar ao início</a>
+</body>
+</html>
